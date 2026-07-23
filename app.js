@@ -47,15 +47,16 @@ app.delete("/delete-user/:id", deleteUser)
 
 app.patch("/update-users/:id", editUser)
 
-
 app.patch("/update-blog/:id", editBlog)
 
 app.patch("/update-product/:id", editProduct)
+
 
 
  //port number
 app.listen(3000, function () {
   console.log("Express server is working at port 3000");
 });
+
 
  
