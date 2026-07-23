@@ -22,7 +22,7 @@ const blog =Blog(sequelize,DataTypes)
 const user = Users(sequelize, DataTypes)
 const product = Product(sequelize, DataTypes)
 
-export default sequelize
+export {sequelize,user,blog, product}
 
 
 
