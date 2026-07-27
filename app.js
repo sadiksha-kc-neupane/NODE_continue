@@ -52,6 +52,7 @@ app.patch("/update-blog/:id", editBlog)
 app.patch("/update-product/:id", editProduct)
 
 app.delete("/delete-product/:id",deleteProduct)
+app.post("/login",loginUser)
 
 
 

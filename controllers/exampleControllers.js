@@ -113,7 +113,7 @@ async function fetchSingle(req, res) {
   res.send(data);
 }
 
-async function fetchSingleProduct(req, res) {
+async function fetchSingleProduct(req, res){
   const id = req.params.id;
   const data = await user.findAll({
     where: {
@@ -237,4 +237,5 @@ export {
   editUser,
   editBlog,
   editProduct,
+  loginUser
 };
