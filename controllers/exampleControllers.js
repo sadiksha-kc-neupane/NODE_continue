@@ -3,6 +3,7 @@ import { blog, product, user } from "../config/connection.js";
 import Product from "../model/products.js";
 import Users from "../model/userModel.js";
 import bcrypt from "bcrypt";
+import jwt from 'jsonwebtoken'
 
 function aboutPageController(req, res) {
   res.send("hello this is about page");
@@ -18,6 +19,7 @@ async function registerUser(req, res) {
   const username = req.body.username;
   const password = req.body.password;
   const email = req.body.email;
+ 
 
   await user.create({
     username,
@@ -39,8 +41,10 @@ async function loginUser(req, res) {
   if (data) {
     const isMatched = bcrypt.compareSync(password, data.password);
     if (isMatched) {
+      const token = jwt.sign({userId:data.id},"thisisscretkey")
       res.status(200).json({
         message: "login is successful",
+        token
       });
     } else {
       res.status(400).json({
@@ -73,13 +77,15 @@ async function ProductController(req, res) {
   const name = req.body.name;
   const description = req.body.description;
   const price = req.body.price;
-  const Qty = req.body.Qty;
+  const Qty = req.body.Qty; 
+  const image = req.body.image;
 
   await product.create({
     name,
     price,
     description,
     Qty,
+    image
   });
   res.send("this is product");
 }

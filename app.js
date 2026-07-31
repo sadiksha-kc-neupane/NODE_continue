@@ -7,14 +7,14 @@ app.use(express.json())
 
 
 app.use(cors({
-  origin:"http://localhost:5173"
+  origin:"*"
 }))
 
 
 
 // const app = require("express") () // this is alternative way
 import {connectDB} from "./config/index.js"
-import { aboutPageController, BlogController, deleteProduct, deleteUser, editBlog, editProduct, editUser, fetchBlog, fetchProduct, fetchSingle, fetchSingleBlog, fetchSingleProduct, fetchUser, homePageController, ProductController, registerUser } from "./controllers/exampleControllers.js"
+import { aboutPageController, BlogController, deleteProduct, deleteUser, editBlog, editProduct, editUser, fetchBlog, fetchProduct, fetchSingle, fetchSingleBlog, fetchSingleProduct, fetchUser, homePageController, loginUser, ProductController, registerUser } from "./controllers/exampleControllers.js"
 import Blog from "./model/Blog.js"
 
 
