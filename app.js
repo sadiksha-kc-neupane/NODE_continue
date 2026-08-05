@@ -16,6 +16,7 @@ app.use(cors({
 import {connectDB} from "./config/index.js"
 import { aboutPageController, BlogController, deleteProduct, deleteUser, editBlog, editProduct, editUser, fetchBlog, fetchProduct, fetchSingle, fetchSingleBlog, fetchSingleProduct, fetchUser, homePageController, loginUser, ProductController, registerUser } from "./controllers/exampleControllers.js"
 import Blog from "./model/Blog.js"
+import { verifyToken } from './middleware/auth.middleware.js'
 
 
 await connectDB();
@@ -28,7 +29,7 @@ app.post("/register",registerUser)
 
 app.post("/blog", BlogController)
 
-app.post("/product", ProductController )
+app.post("/product",verifyToken, ProductController )
 
 app.get("/fetch-users", fetchUser)
 

@@ -13,20 +13,30 @@ function homePageController(req, res) {
   res.send("hello this is home page");
 }
 
-async function registerUser(req, res) {
+async function  registerUser(req, res) {
   // console.log(req.body)
 
   const username = req.body.username;
   const password = req.body.password;
   const email = req.body.email;
  
-
-  await user.create({
+  try {
+   const user = await user.create({
     username,
     password: bcrypt.hashSync(password, 10),
     email,
+     });
+    
+  } catch (error) {
+    console.error("Failed to register")
+    
+  }
+ 
+
+  res.status(200).json({
+    message: "register User",
+    user: user
   });
-  res.send("register page");
 }
 
 async function loginUser(req, res) {
@@ -44,7 +54,8 @@ async function loginUser(req, res) {
       const token = jwt.sign({userId:data.id},"thisisscretkey")
       res.status(200).json({
         message: "login is successful",
-        token
+        token,
+        data:data
       });
     } else {
       res.status(400).json({
@@ -57,6 +68,7 @@ async function loginUser(req, res) {
     });
   }
 }
+
 
 async function BlogController(req, res) {
   const title = req.body.title;
@@ -79,15 +91,23 @@ async function ProductController(req, res) {
   const price = req.body.price;
   const Qty = req.body.Qty; 
   const image = req.body.image;
+  console.log("data", name, description, price, Qty, image)
 
-  await product.create({
+  const productData = await product.create({
     name,
     price,
     description,
     Qty,
     image
   });
-  res.send("this is product");
+
+  console.log("product-data", productData)
+  res.status(200).json({
+    message:"product is registered",
+    data:productData
+  })
+
+    
 }
 
 async function fetchUser(req, res) {
